@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "HELLO DEVCONTAINER FOR CLOUD STORAGE"
+exit 0

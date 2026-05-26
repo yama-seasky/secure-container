@@ -1,0 +1,62 @@
+{
+    "name": "セキュアなコンテナとは",
+    "containerEnv": {
+        "GIT_REPO_URL": "https://github.com/yama-seasky/secure-container.git"
+    },
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        {
+            "source": "${devcontainerId}_workspace",
+            "target": "/workspace",
+            "type": "volume"
+        },
+        {
+            "source": "${localWorkspaceFolder}/.devcontainer",
+            "target": "/workspace/.devcontainer",
+            "type": "bind"
+        },
+        {
+            "source": "${localWorkspaceFolder}/share",
+            "target": "/workspace/.share",
+            "type": "bind"
+        }
+    ],
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    // "runArgs": [
+    //     "--gpus=all" //GPUを使う場合有効化すること
+    // ],
+    "postCreateCommand": "bash .devcontainer/system/setup.sh && bash .devcontainer/post-create.sh",
+    "postStartCommand": "bash .devcontainer/system/start.sh && bash .devcontainer/post-start.sh",
+    "postAttachCommand": "bash .devcontainer/system/attach.sh && bash .devcontainer/post-attach.sh",
+    "customizations": {
+        "vscode": {
+            "settings": {},
+            "extensions": [
+                "formulahendry.code-runner",
+                "ms-python.python",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "mhutchie.git-graph",
+                "donjayamanne.githistory",
+                "docker.docker",
+                "ms-azuretools.vscode-docker",
+                "MS-CEINTL.vscode-language-pack-ja",
+                "yzane.markdown-pdf",
+                "ms-python.vscode-pylance",
+                "ms-python.debugpy",
+                "ms-vscode-remote.vscode-remote-extensionpack",
+                "mutantdino.resourcemonitor"
+            ]
+        }
+    },
+    "remoteEnv": {
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {
+            "configGlobal": true
+        }
+    }
+}
