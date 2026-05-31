@@ -12,12 +12,15 @@ jobs:
       - name: Build Local Image
         run: docker build -t trivy-test:local .
 
+      - name: Download HTML Template
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl -o html.tpl
       - name: Run Trivy scan (OS & App)
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'trivy-test:local'
           format: 'template'
-          template: '@/home/runner/.local/bin/trivy-bin/contrib/html.tpl'
+          template: '@html.tpl'
           output: 'trivy-results.html'
           severity: 'CRITICAL,HIGH'
           exit-code: '0'
